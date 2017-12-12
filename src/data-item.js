@@ -1,3 +1,5 @@
+import { expect } from 'chai';
+
 export default class DataItem {
     constructor(value, tags) {
         if (this._isMatchFormat(value)) {
@@ -26,7 +28,12 @@ export default class DataItem {
     }
 
     isMe(value) {
-        return this.value === value;
+        try {
+            expect(value).to.eql(this.value);
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 
     isMyTag(tags = [], isStrict) {
