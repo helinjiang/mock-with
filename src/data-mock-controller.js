@@ -1,4 +1,5 @@
 import DataItem from './data-item';
+import { getRandomIndex } from './tools';
 
 export default class DataMockController {
     constructor(list = []) {
@@ -65,7 +66,7 @@ export default class DataMockController {
         // 找到目标的随机数
         while (true) {
             // 首先生成随机一个数
-            let randomIndex = parseInt(Math.random() * this.store.length + '');
+            let randomIndex = getRandomIndex(this.store);
 
             // 如果该随机数未被使用，则停止
             if (this._cachedRandomQueue.indexOf(randomIndex) < 0) {
