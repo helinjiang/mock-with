@@ -1,5 +1,6 @@
 import DataMockController from './data-mock-controller';
+import DataItem from './data-item';
 
-export DataItem from './data-item';
+DataMockController.DataItem = DataItem;
 
-export default DataMockController;
+module.exports = DataMockController;
