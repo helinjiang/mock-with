@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "babel src -d lib -w",
     "prepublish": "babel  src -d lib",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive --require babel-core/register"
   },
   "repository": {
     "type": "git",
