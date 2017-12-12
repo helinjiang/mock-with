@@ -80,27 +80,27 @@ describe('测试 data-mock-controller.js', function () {
 
         it('查不到标签为a的数据', function () {
             let result = dataMockController.getDataByTag('a');
-            expect(result).to.be.an('array').that.is.empty;
+            expect(result).to.be.undefined;
         });
 
         it('标签为t的数据有一个', function () {
             let result = dataMockController.getDataByTag('t');
-            expect(result).to.have.lengthOf(1);
+            expect(result).to.equal('c');
         });
 
         it('标签为f的数据有三个', function () {
             let result = dataMockController.getDataByTag('f');
-            expect(result).to.have.lengthOf(3);
+            expect(result).to.be.oneOf(['c', 'd', 'e']);
         });
 
         it('标签为o或f的数据有三个', function () {
             let result = dataMockController.getDataByTag(['o', 'f']);
-            expect(result).to.have.lengthOf(3);
+            expect(result).to.be.oneOf(['c', 'd', 'e']);
         });
 
         it('标签为o且f的数据有两个', function () {
             let result = dataMockController.getDataByTag(['o', 'f'], true);
-            expect(result).to.have.lengthOf(2);
+            expect(result).to.be.oneOf(['d', 'e']);
         });
     });
 

@@ -1,5 +1,5 @@
 import DataItem from './data-item';
-import { getRandomIndex } from './tools';
+import { getRandomIndex, getOneOf } from './tools';
 
 export default class DataMockController {
     constructor(list = []) {
@@ -83,7 +83,7 @@ export default class DataMockController {
      * 通过指定的 tag 找到对应的数据
      * @param {String | Array} tags
      * @param {Boolean} [isStrict] 是否是严格模式，该模式下需要同时满足要求
-     * @return {Array}
+     * @return {*}
      */
     getDataByTag(tags, isStrict) {
         if (!Array.isArray(tags)) {
@@ -94,7 +94,11 @@ export default class DataMockController {
             return item.isMyTag(tags, isStrict);
         });
 
-        return filterResult;
+        if (!filterResult.length) {
+            return;
+        }
+
+        return getOneOf(filterResult).getData();
     }
 }
 
