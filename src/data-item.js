@@ -29,6 +29,22 @@ export default class DataItem {
         return this.value === value;
     }
 
+    isMyTag(tags = [], isStrict) {
+        let filterResult = tags.filter((tag) => {
+            return this.tags.indexOf(tag) > -1;
+        });
+
+        if (!filterResult.length) {
+            return false;
+        }
+
+        if (!isStrict) {
+            return true;
+        }
+
+        return tags.length === filterResult.length;
+    }
+
     getData() {
         return this.value;
     }

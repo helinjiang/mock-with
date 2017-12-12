@@ -13,23 +13,6 @@ export default class DataMockController {
         this.addList(list);
     }
 
-    // /**
-    //  * 通过指定的 value 找到对应的数据
-    //  * @param {String} value
-    //  * @return {Object || undefined}
-    //  */
-    // getDataByValue(value = '') {
-    //     let filterResult = this.store.filter((item) => {
-    //         return item.isMe(value);
-    //     });
-    //
-    //     // if (filterResult.length !== 1) {
-    //     //     throw new Error(`dirty data for ${value}`);
-    //     // }
-    //
-    //     return filterResult[0];
-    // }
-
     /**
      * 追加数组数据到仓库中
      * @param {Array} list
@@ -93,6 +76,24 @@ export default class DataMockController {
 
         // 因为新生成的随机数一定是在队列的最后，所以直接取最后一个值即可
         return this.store[this._cachedRandomQueue[this._cachedRandomQueue.length - 1]].getData();
+    }
+
+    /**
+     * 通过指定的 tag 找到对应的数据
+     * @param {String | Array} tags
+     * @param {Boolean} [isStrict] 是否是严格模式，该模式下需要同时满足要求
+     * @return {Array}
+     */
+    getDataByTag(tags, isStrict) {
+        if (!Array.isArray(tags)) {
+            tags = [tags];
+        }
+
+        let filterResult = this.store.filter((item) => {
+            return item.isMyTag(tags, isStrict);
+        });
+
+        return filterResult;
     }
 }
 

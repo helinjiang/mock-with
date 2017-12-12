@@ -66,7 +66,42 @@ describe('测试 data-mock-controller.js', function () {
             dataMockController.addList(['a', 'c']);
             expect(dataMockController.store).to.have.lengthOf(3);
         });
+    });
 
+    describe('验证 getDataByTag', function () {
+        let dataMockController;
+
+        before(function () {
+            dataMockController = new DataMockController(['a', 'b']);
+            dataMockController.addOne('c', ['t', 'f', 'boys']);
+            dataMockController.addOne('d', ['o', 'f']);
+            dataMockController.addOne('e', ['o', 'f']);
+        });
+
+        it('查不到标签为a的数据', function () {
+            let result = dataMockController.getDataByTag('a');
+            expect(result).to.be.an('array').that.is.empty;
+        });
+
+        it('标签为t的数据有一个', function () {
+            let result = dataMockController.getDataByTag('t');
+            expect(result).to.have.lengthOf(1);
+        });
+
+        it('标签为f的数据有三个', function () {
+            let result = dataMockController.getDataByTag('f');
+            expect(result).to.have.lengthOf(3);
+        });
+
+        it('标签为o或f的数据有三个', function () {
+            let result = dataMockController.getDataByTag(['o', 'f']);
+            expect(result).to.have.lengthOf(3);
+        });
+
+        it('标签为o且f的数据有两个', function () {
+            let result = dataMockController.getDataByTag(['o', 'f'], true);
+            expect(result).to.have.lengthOf(2);
+        });
     });
 
 });
