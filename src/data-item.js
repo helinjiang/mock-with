@@ -16,7 +16,7 @@ export default class DataItem {
              * 标签数组，用于过滤
              * @type {Array}
              */
-            this.tags =  this._generateTags(data.tags);
+            this.tags = this._generateTags(data.tags);
         } else {
             /**
              * 值，建议使用原始数据类型的值，比如字符串或者数字
@@ -37,8 +37,12 @@ export default class DataItem {
         }
     }
 
-    isMe(id){
+    isMe(id) {
         return this.id === id;
+    }
+
+    getData() {
+        return this.data;
     }
 
     _isMatchFormat(data) {
