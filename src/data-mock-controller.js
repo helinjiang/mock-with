@@ -1,8 +1,10 @@
+import DataItem from './data-item';
+
 export default class DataMockController {
     constructor(list = []) {
         /**
-         * 存储的数据结构为 [{_key:String,_value:*,_tags:Array}]
-         * @type {*|Array}
+         * 存储的数据结构为 [{DataItem},{DataItem}]
+         * @type {Array}
          */
         this.store = [];
 
@@ -12,16 +14,16 @@ export default class DataMockController {
     }
 
     isExist(data) {
-        if (!data || !data._key) {
+        if (!data || !data.id) {
             return false;
         }
 
-        return !!this.getDataByKey(data._key);
+        return !!this.getDataByKey(data.id);
     }
 
     getDataByKey(key = '') {
         let filterResult = this.store.filter((item) => {
-            return item._key === key;
+            return item.isMe(key);
         });
 
         // if (filterResult.length !== 1) {
@@ -40,25 +42,13 @@ export default class DataMockController {
     }
 
     addOne(data, key, tags = []) {
-        if (data && data._key) {
-            // 如果是符合的数据格式，则对比是否已经存在了这个数据
-            if (this.isExist(data)) {
-                console.log('exist', data);
-            } else {
-                this.store.push(data);
-            }
-        } else {
-            // 如果不是符合的数据格式，则需要自定义生成一个 _key
-            if (typeof key !== 'string') {
-                key = 'key_' + Date.now() + Math.random();
-            }
-
-            this.store.push({
-                _key: key,
-                _value: data,
-                _tags: tags
-            });
+        // 如果是符合的数据格式，则对比是否已经存在了这个数据
+        if (this.isExist(data)) {
+            console.log('exist', data);
+            return;
         }
+
+        this.store.push(new DataItem(data, key, tags));
     }
 
     getRandom() {
@@ -85,7 +75,7 @@ export default class DataMockController {
         }
 
         // 因为新生成的随机数一定是在队列的最后，所以直接取最后一个值即可
-        return this.store[this._cachedRandomQueue[this._cachedRandomQueue.length - 1]]._value;
+        return this.store[this._cachedRandomQueue[this._cachedRandomQueue.length - 1]].data;
     }
 }
 
