@@ -10,7 +10,6 @@ describe('测试 data-item.js', function () {
 
     describe('传参仅 data', function () {
         let dataItem = new DataItem('a');
-        console.log(dataItem);
 
         it('dataItem 有三个属性', function () {
             expect(dataItem).to.have.all.keys(['data', 'id', 'tags']);
@@ -26,6 +25,31 @@ describe('测试 data-item.js', function () {
 
         it('dataItem.tags 为空数组', function () {
             expect(dataItem.tags).to.be.an('array').that.is.empty;
+        });
+    });
+
+    describe('传参 data 和 id', function () {
+        let dataItem = new DataItem('a', 'my_id');
+
+        it('dataItem 有三个属性', function () {
+            expect(dataItem).to.have.all.keys(['data', 'id', 'tags']);
+        });
+
+        it('dataItem.id="my_id"', function () {
+            expect(dataItem.id).to.equal('my_id');
+        });
+    });
+
+    describe('传参 data 、 id 和 tags', function () {
+        let dataItem = new DataItem('a', 'my_id', ['t', 'f', 'boys']);
+        console.log(dataItem);
+
+        it('dataItem 有三个属性', function () {
+            expect(dataItem).to.have.all.keys(['data', 'id', 'tags']);
+        });
+
+        it('dataItem.tags 为预期值', function () {
+            expect(dataItem.tags).to.members(['t', 'f', 'boys']);
         });
     });
 });
