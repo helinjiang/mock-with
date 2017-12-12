@@ -61,7 +61,11 @@ export default class DataItem {
     }
 
     _generateTags(tags) {
-        return (Array.isArray(tags) ? tags : []);
+        if (Array.isArray(tags)) {
+            return tags;
+        }
+
+        return (typeof tags !== 'undefined') ? [tags] : [];
     }
 }
 
