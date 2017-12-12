@@ -35,5 +35,38 @@ describe('测试 data-item.js', function () {
             expect(dataItem.tags).to.members(['t', 'f', 'boys']);
         });
     });
+
+    describe('校验 isMe()', function () {
+        it('对比原始数据类型时，符合则返回true', function () {
+            let dataItem = new DataItem('a');
+            expect(dataItem.isMe('a')).to.be.true;
+        });
+
+        it('对比原始数据类型时，不符合则返回false', function () {
+            let dataItem = new DataItem('a');
+            expect(dataItem.isMe('aa')).to.be.false;
+        });
+
+        it('对比对象类型时，符合则返回true', function () {
+            let dataItem = new DataItem({ a: 1 });
+            expect(dataItem.isMe({ a: 1 })).to.be.true;
+        });
+
+        it('对比对象类型时，字段名相同，值不同，返回false', function () {
+            let dataItem = new DataItem({ a: 1 });
+            expect(dataItem.isMe({ a: 2 })).to.be.false;
+        });
+
+        it('对比对象类型时，字段名不同，值相同，返回false', function () {
+            let dataItem = new DataItem({ a: 1 });
+            expect(dataItem.isMe({ aa: 1 })).to.be.false;
+        });
+
+        it('对比对象类型时，只有部分属性相同，返回false', function () {
+            let dataItem = new DataItem({ a: 1 });
+            expect(dataItem.isMe({ a: 1, b: 2 })).to.be.false;
+        });
+
+    });
 });
 
