@@ -1,33 +1,21 @@
 export default class DataItem {
-    constructor(data, id, tags) {
-        if (this._isMatchFormat(data)) {
+    constructor(value, tags) {
+        if (this._isMatchFormat(value)) {
             /**
              * 值，建议使用原始数据类型的值，比如字符串或者数字
              */
-            this.data = data.data;
-
-            /**
-             * 唯一标识，可以不填，自动生成，但是如果要更新，则必须填写
-             * @type {String}
-             */
-            this.id = this._generateId(data.id);
+            this.value = value.value;
 
             /**
              * 标签数组，用于过滤
              * @type {Array}
              */
-            this.tags = this._generateTags(data.tags);
+            this.tags = this._generateTags(value.tags);
         } else {
             /**
              * 值，建议使用原始数据类型的值，比如字符串或者数字
              */
-            this.data = data;
-
-            /**
-             * 唯一标识，可以不填，自动生成，但是如果要更新，则必须填写
-             * @type {String}
-             */
-            this.id = this._generateId(id);
+            this.value = value;
 
             /**
              * 标签数组，用于过滤
@@ -37,20 +25,16 @@ export default class DataItem {
         }
     }
 
-    isMe(id) {
-        return this.id === id;
+    isMe(value) {
+        return this.value === value;
     }
 
     getData() {
-        return this.data;
+        return this.value;
     }
 
     _isMatchFormat(data) {
-        return data && data.id;
-    }
-
-    _generateId(id) {
-        return id || 'id_' + Date.now() + Math.random();
+        return data && data.value;
     }
 
     _generateTags(tags) {

@@ -8,19 +8,15 @@ describe('测试 data-item.js', function () {
         });
     });
 
-    describe('传参仅 data', function () {
+    describe('传参仅 value', function () {
         let dataItem = new DataItem('a');
 
-        it('dataItem 有三个属性', function () {
-            expect(dataItem).to.have.all.keys(['data', 'id', 'tags']);
+        it('dataItem 有两个属性', function () {
+            expect(dataItem).to.have.all.keys(['value', 'tags']);
         });
 
-        it('dataItem.data="a"', function () {
-            expect(dataItem.data).to.equal('a');
-        });
-
-        it('dataItem.id 自动生成', function () {
-            expect(dataItem.id).to.match(/id_\d+\.\d+/);
+        it('dataItem.value="a"', function () {
+            expect(dataItem.value).to.equal('a');
         });
 
         it('dataItem.tags 为空数组', function () {
@@ -28,23 +24,11 @@ describe('测试 data-item.js', function () {
         });
     });
 
-    describe('传参 data 和 id', function () {
-        let dataItem = new DataItem('a', 'my_id');
+    describe('传参 data 和 tags', function () {
+        let dataItem = new DataItem('a', ['t', 'f', 'boys']);
 
-        it('dataItem 有三个属性', function () {
-            expect(dataItem).to.have.all.keys(['data', 'id', 'tags']);
-        });
-
-        it('dataItem.id="my_id"', function () {
-            expect(dataItem.id).to.equal('my_id');
-        });
-    });
-
-    describe('传参 data 、 id 和 tags', function () {
-        let dataItem = new DataItem('a', 'my_id', ['t', 'f', 'boys']);
-
-        it('dataItem 有三个属性', function () {
-            expect(dataItem).to.have.all.keys(['data', 'id', 'tags']);
+        it('dataItem 有两个属性', function () {
+            expect(dataItem).to.have.all.keys(['value', 'tags']);
         });
 
         it('dataItem.tags 为预期值', function () {

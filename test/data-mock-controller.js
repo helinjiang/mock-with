@@ -28,7 +28,7 @@ describe('测试 data-mock-controller.js', function () {
 
         it('dataMockController.addOne("a") 重复', function () {
             dataMockController.addOne('a');
-            expect(dataMockController.store).to.have.lengthOf(3);
+            expect(dataMockController.store).to.have.lengthOf(2);
         });
 
         it('dataMockController.addOne("c") 不重复', function () {
@@ -38,12 +38,11 @@ describe('测试 data-mock-controller.js', function () {
 
         it('dataMockController.addOne(DataItem) 重复', function () {
             dataMockController.addOne({
-                data: 'a'
+                value: 'a'
             });
 
-            expect(dataMockController.store).to.have.lengthOf(3);
+            expect(dataMockController.store).to.have.lengthOf(2);
         });
-
 
         it('dataMockController.addOne(DataItem) 不重复', function () {
             dataMockController.addOne({
@@ -63,9 +62,9 @@ describe('测试 data-mock-controller.js', function () {
             dataMockController = new DataMockController(['a', 'b']);
         });
 
-        it('dataMockController.addList(["a","b"])', function () {
-            dataMockController.addList(['a', 'b']);
-            expect(dataMockController.store).to.have.lengthOf(4);
+        it('dataMockController.addList(["a","c"])', function () {
+            dataMockController.addList(['a', 'c']);
+            expect(dataMockController.store).to.have.lengthOf(3);
         });
 
     });

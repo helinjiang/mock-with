@@ -13,22 +13,22 @@ export default class DataMockController {
         this.addList(list);
     }
 
-    /**
-     * 通过指定的 id 找到对应的数据
-     * @param {String} id
-     * @return {Object || undefined}
-     */
-    getDataById(id = '') {
-        let filterResult = this.store.filter((item) => {
-            return item.isMe(id);
-        });
-
-        // if (filterResult.length !== 1) {
-        //     throw new Error(`dirty data for ${id}`);
-        // }
-
-        return filterResult[0];
-    }
+    // /**
+    //  * 通过指定的 value 找到对应的数据
+    //  * @param {String} value
+    //  * @return {Object || undefined}
+    //  */
+    // getDataByValue(value = '') {
+    //     let filterResult = this.store.filter((item) => {
+    //         return item.isMe(value);
+    //     });
+    //
+    //     // if (filterResult.length !== 1) {
+    //     //     throw new Error(`dirty data for ${value}`);
+    //     // }
+    //
+    //     return filterResult[0];
+    // }
 
     /**
      * 追加数组数据到仓库中
@@ -44,18 +44,20 @@ export default class DataMockController {
 
     /**
      * 追加一个数据到仓库中
-     * @param {String || Number || Object} data
-     * @param {String} [id] 指定的ID名字
+     * @param {String || Number || Object} value
      * @param {Array} [tags] 标签数组
      */
-    addOne(data, id, tags = []) {
-        let newDataItem = new DataItem(data, id, tags);
+    addOne(value, tags = []) {
+        let newDataItem = new DataItem(value, tags);
 
-        // 如果已经存在，则进行更新，但不新增
-        let existDataItem = this.getDataById(newDataItem.id);
+        // 如果已经存在，则不再新增，而是更新之
+        let filterResult = this.store.filter((item) => {
+            return item.isMe(newDataItem.value);
+        });
 
-        if (existDataItem) {
-            console.log('exist,new', existDataItem, newDataItem);
+        if (filterResult.length) {
+            let existDataItem = filterResult[0];
+            console.log('exist, new', existDataItem, newDataItem);
             Object.assign(existDataItem, newDataItem);
             return;
         }
