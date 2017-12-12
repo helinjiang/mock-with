@@ -10,9 +10,6 @@ describe('测试 data-mock-controller.js', function () {
 
     describe('参数list为普通数组', function () {
         let dataMockController = new DataMockController(['a', 'b', 'c', 'd']);
-
-        console.log(JSON.stringify(dataMockController.store));
-
         it('dataMockController.store 有四个元素', function () {
             expect(dataMockController.store).to.have.lengthOf(4);
         });
@@ -20,6 +17,57 @@ describe('测试 data-mock-controller.js', function () {
         it('dataMockController.getRandom() 随机返回一个list中的值', function () {
             expect(dataMockController.getRandom()).to.be.oneOf(['a', 'b', 'c', 'd']);
         });
+    });
+
+    describe('验证 addOne', function () {
+        let dataMockController;
+
+        beforeEach(function () {
+            dataMockController = new DataMockController(['a', 'b']);
+        });
+
+        it('dataMockController.addOne("a") 重复', function () {
+            dataMockController.addOne('a');
+            expect(dataMockController.store).to.have.lengthOf(3);
+        });
+
+        it('dataMockController.addOne("c") 不重复', function () {
+            dataMockController.addOne('c');
+            expect(dataMockController.store).to.have.lengthOf(3);
+        });
+
+        it('dataMockController.addOne(DataItem) 重复', function () {
+            dataMockController.addOne({
+                data: 'a'
+            });
+
+            expect(dataMockController.store).to.have.lengthOf(3);
+        });
+
+
+        it('dataMockController.addOne(DataItem) 不重复', function () {
+            dataMockController.addOne({
+                data: 'DATAITEM',
+                id: 'ID',
+                tags: ['TAGS']
+            });
+
+            expect(dataMockController.store).to.have.lengthOf(3);
+        });
+    });
+
+    describe('验证 addList', function () {
+        let dataMockController;
+
+        beforeEach(function () {
+            dataMockController = new DataMockController(['a', 'b']);
+        });
+
+        it('dataMockController.addList(["a","b"])', function () {
+            dataMockController.addList(['a', 'b']);
+            expect(dataMockController.store).to.have.lengthOf(4);
+        });
+
     });
 
 });

@@ -42,7 +42,6 @@ describe('测试 data-item.js', function () {
 
     describe('传参 data 、 id 和 tags', function () {
         let dataItem = new DataItem('a', 'my_id', ['t', 'f', 'boys']);
-        console.log(dataItem);
 
         it('dataItem 有三个属性', function () {
             expect(dataItem).to.have.all.keys(['data', 'id', 'tags']);
