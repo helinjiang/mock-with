@@ -1,7 +1,7 @@
 {
   "name": "mock-with",
-  "version": "0.0.1",
-  "description": "make data-mock to be easy",
+  "version": "0.0.2",
+  "description": "make mock to be easy",
   "main": "index.js",
   "scripts": {
     "dev": "babel src -d lib -w",
