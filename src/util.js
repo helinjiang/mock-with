@@ -14,7 +14,7 @@ function getRandomIndex(list = []) {
  * @param {Array} list 数组
  * @returns {*}
  */
-function getOneOf(list) {
+function getOneOf(list = []) {
     return list[getRandomIndex(list)];
 }
 
