@@ -1,7 +1,7 @@
 const Item = require('./Item');
 const { getOneOf, getRandomIndex } = require('../util');
 
-module.exports = class {
+module.exports = class Controller {
     constructor(list = []) {
         /**
          * 存储的数据结构为 [{Item},{Item}]

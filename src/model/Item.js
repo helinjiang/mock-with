@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-module.exports = class {
+module.exports = class Item {
     /**
      * 每一个 Item 都有一个值(value)，以及数个标签(tags)
      *
