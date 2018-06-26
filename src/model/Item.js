@@ -43,13 +43,18 @@ module.exports = class {
     }
 
     /**
-     * 判断目标标签集合是否包含在标签集合中
+     * 判断目标标签是否与自己的标签有交集，
+     * 如果要求目标标签集合是自己标签的子集，则需要设置 shouldSubset=true
      *
-     * @param {Array} tags 标签集合
-     * @param {Boolean} isStrict 是否严格相等
+     * @param {Array | String} tags 标签集合
+     * @param {Boolean} [shouldSubset] 是否要求是子集
      * @returns {boolean}
      */
-    isMyTag(tags = [], isStrict) {
+    isMyTag(tags = [], shouldSubset) {
+        if (!Array.isArray(tags)) {
+            tags = [tags];
+        }
+
         let filterResult = tags.filter((tag) => {
             return this.tags.indexOf(tag) > -1;
         });
@@ -58,7 +63,7 @@ module.exports = class {
             return false;
         }
 
-        if (!isStrict) {
+        if (!shouldSubset) {
             return true;
         }
 
