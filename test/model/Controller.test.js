@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const { Controller } = require('../../lib');
+const { Controller, Item } = require('../../lib');
 
 describe('测试 model/Controller.js', function () {
     describe('常规验证', function () {
@@ -38,7 +38,7 @@ describe('测试 model/Controller.js', function () {
             expect(controller.store).to.have.lengthOf(3);
         });
 
-        it('controller.addOne(DataItem) 重复', function () {
+        it('controller.addOne(Item) 重复', function () {
             controller.addOne({
                 value: 'a'
             });
@@ -46,12 +46,24 @@ describe('测试 model/Controller.js', function () {
             expect(controller.store).to.have.lengthOf(2);
         });
 
-        it('controller.addOne(DataItem) 不重复', function () {
+        it('controller.addOne(Item) 不重复', function () {
             controller.addOne({
                 data: 'DATAITEM',
                 id: 'ID',
                 tags: ['TAGS']
             });
+
+            expect(controller.store).to.have.lengthOf(3);
+        });
+
+        it('controller.addOne(Item) 重复，Item对象', function () {
+            controller.addOne(new Item('a', ['TAGS']));
+
+            expect(controller.store).to.have.lengthOf(2);
+        });
+
+        it('controller.addOne(Item) 不重复，Item对象', function () {
+            controller.addOne(new Item('other', ['TAGS']));
 
             expect(controller.store).to.have.lengthOf(3);
         });
@@ -61,12 +73,12 @@ describe('测试 model/Controller.js', function () {
         let controller;
 
         beforeEach(function () {
-            controller = new Controller(['a', 'b']);
+            controller = new Controller(['a', 'b', new Item('other', ['TAGS'])]);
         });
 
         it('controller.addList(["a","c"])', function () {
             controller.addList(['a', 'c']);
-            expect(controller.store).to.have.lengthOf(3);
+            expect(controller.store).to.have.lengthOf(4);
         });
     });
 
