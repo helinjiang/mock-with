@@ -1,10 +1,10 @@
-import DataItem from './data-item';
-import { getRandomIndex, getOneOf } from './tools';
+const Item = require('./Item');
+const { getOneOf, getRandomIndex } = require('../util');
 
-export default class DataMockController {
+module.exports = class {
     constructor(list = []) {
         /**
-         * 存储的数据结构为 [{DataItem},{DataItem}]
+         * 存储的数据结构为 [{Item},{Item}]
          * @type {Array}
          */
         this.store = [];
@@ -21,7 +21,7 @@ export default class DataMockController {
     addList(list = []) {
         let self = this;
 
-        list.forEach(function (item) {
+        list.forEach((item) => {
             self.addOne(item);
         });
     }
@@ -32,21 +32,22 @@ export default class DataMockController {
      * @param {Array} [tags] 标签数组
      */
     addOne(value, tags = []) {
-        let newDataItem = new DataItem(value, tags);
+        let newItem = new Item(value, tags);
 
         // 如果已经存在，则不再新增，而是更新之
         let filterResult = this.store.filter((item) => {
-            return item.isMe(newDataItem.value);
+            return item.isMe(newItem.value);
         });
 
+        // 如果已经存在，则更新数据
         if (filterResult.length) {
-            let existDataItem = filterResult[0];
-            console.log('exist, new', existDataItem, newDataItem);
-            Object.assign(existDataItem, newDataItem);
+            let existItem = filterResult[0];
+            // console.log('exist, new', existItem, newItem);
+            Object.assign(existItem, newItem);
             return;
         }
 
-        this.store.push(newDataItem);
+        this.store.push(newItem);
     }
 
     /**
@@ -63,14 +64,23 @@ export default class DataMockController {
             this._cachedRandomQueue = [];
         }
 
+        let safety = 0;
+
         // 找到目标的随机数
         while (true) {
+            safety++;
+
             // 首先生成随机一个数
             let randomIndex = getRandomIndex(this.store);
 
             // 如果该随机数未被使用，则停止
             if (this._cachedRandomQueue.indexOf(randomIndex) < 0) {
                 this._cachedRandomQueue.push(randomIndex);
+                break;
+            }
+
+            // 最多循环 1万次，避免陷入死循环
+            if (safety > 10 * 1000) {
                 break;
             }
         }
@@ -85,7 +95,7 @@ export default class DataMockController {
      * @param {Boolean} [isStrict] 是否是严格模式，该模式下需要同时满足要求
      * @return {*}
      */
-    getDataByTag(tags, isStrict) {
+    getByTag(tags, isStrict) {
         if (!Array.isArray(tags)) {
             tags = [tags];
         }
@@ -100,5 +110,5 @@ export default class DataMockController {
 
         return getOneOf(filterResult).getData();
     }
-}
+};
 

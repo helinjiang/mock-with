@@ -1,6 +1,12 @@
-import { expect } from 'chai';
+const { expect } = require('chai');
 
-export default class DataItem {
+module.exports = class {
+    /**
+     * 每一个 Item 都有一个值(value)，以及数个标签(tags)
+     *
+     * @param {{value:*,tags:Array} | *} value 对象或者其他元素
+     * @param {Array} [tags] 标签列表
+     */
     constructor(value, tags) {
         if (this._isMatchFormat(value)) {
             /**
@@ -36,6 +42,13 @@ export default class DataItem {
         }
     }
 
+    /**
+     * 判断目标标签集合是否包含在标签集合中
+     *
+     * @param {Array} tags 标签集合
+     * @param {Boolean} isStrict 是否严格相等
+     * @returns {boolean}
+     */
     isMyTag(tags = [], isStrict) {
         let filterResult = tags.filter((tag) => {
             return this.tags.indexOf(tag) > -1;
@@ -52,6 +65,10 @@ export default class DataItem {
         return tags.length === filterResult.length;
     }
 
+    /**
+     * 获取内容
+     * @returns {value}
+     */
     getData() {
         return this.value;
     }
@@ -67,5 +84,5 @@ export default class DataItem {
 
         return (typeof tags !== 'undefined') ? [tags] : [];
     }
-}
+};
 

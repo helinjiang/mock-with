@@ -1,15 +1,15 @@
 import { expect } from 'chai';
-import DataMockController from '../src/data-mock-controller';
+import Controller from '../src/model/data-mock-controller';
 
 describe('测试 data-mock-controller.js', function () {
     describe('常规验证', function () {
         it('DataMockController 属性存在', function () {
-            expect(DataMockController).to.be.an('function');
+            expect(Controller).to.be.an('function');
         });
     });
 
     describe('参数list为普通数组', function () {
-        let dataMockController = new DataMockController(['a', 'b', 'c', 'd']);
+        let dataMockController = new Controller(['a', 'b', 'c', 'd']);
         it('dataMockController.store 有四个元素', function () {
             expect(dataMockController.store).to.have.lengthOf(4);
         });
@@ -23,7 +23,7 @@ describe('测试 data-mock-controller.js', function () {
         let dataMockController;
 
         beforeEach(function () {
-            dataMockController = new DataMockController(['a', 'b']);
+            dataMockController = new Controller(['a', 'b']);
         });
 
         it('dataMockController.addOne("a") 重复', function () {
@@ -59,7 +59,7 @@ describe('测试 data-mock-controller.js', function () {
         let dataMockController;
 
         beforeEach(function () {
-            dataMockController = new DataMockController(['a', 'b']);
+            dataMockController = new Controller(['a', 'b']);
         });
 
         it('dataMockController.addList(["a","c"])', function () {
@@ -72,7 +72,7 @@ describe('测试 data-mock-controller.js', function () {
         let dataMockController;
 
         before(function () {
-            dataMockController = new DataMockController(['a', 'b']);
+            dataMockController = new Controller(['a', 'b']);
             dataMockController.addOne('c', ['t', 'f', 'boys']);
             dataMockController.addOne('d', ['o', 'f']);
             dataMockController.addOne('e', ['o', 'f']);
