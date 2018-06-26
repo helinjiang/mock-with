@@ -92,16 +92,16 @@ module.exports = class {
     /**
      * 通过指定的 tag 找到对应的数据
      * @param {String | Array} tags
-     * @param {Boolean} [isStrict] 是否是严格模式，该模式下需要同时满足要求
+     * @param {Boolean} [shouldSubset] 是否要求是子集
      * @return {*}
      */
-    getByTag(tags, isStrict) {
+    getByTag(tags, shouldSubset) {
         if (!Array.isArray(tags)) {
             tags = [tags];
         }
 
         let filterResult = this.store.filter((item) => {
-            return item.isMyTag(tags, isStrict);
+            return item.isMyTag(tags, shouldSubset);
         });
 
         if (!filterResult.length) {
