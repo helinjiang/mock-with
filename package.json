@@ -1,7 +1,7 @@
 {
   "name": "mock-with",
-  "version": "0.0.6",
-  "description": "make mock to be easy",
+  "version": "1.0.0",
+  "description": "Make mock to be easy",
   "main": "lib/index.js",
   "scripts": {
     "dev": "babel src -d lib -w",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/helinjiang/mock-with.git"
+    "url": "git+https://github.com/matmanjs/mock-with.git"
   },
   "keywords": [
     "mock"
@@ -18,9 +18,9 @@
   "author": "helinjiang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/helinjiang/mock-with/issues"
+    "url": "https://github.com/matmanjs/mock-with/issues"
   },
-  "homepage": "https://github.com/helinjiang/mock-with#readme",
+  "homepage": "https://github.com/matmanjs/mock-with#readme",
   "dependencies": {
     "chai": "^4.1.2"
   },
