@@ -32,7 +32,7 @@ module.exports = class {
      * @param {Array} [tags] 标签数组
      */
     addOne(value, tags = []) {
-        let newItem = new Item(value, tags);
+        let newItem = (value instanceof Item) ? value : new Item(value, tags);
 
         // 如果已经存在，则不再新增，而是更新之
         let filterResult = this.store.filter((item) => {
