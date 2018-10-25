@@ -1,5 +1,11 @@
+import Store from './model/Store';
+import StoreItem from './model/StoreItem';
+
+import { getOneOf, getRandomIndex } from './util';
+
 module.exports = {
-    Controller: require('./model/Controller'),
-    Item: require('./model/Item'),
-    util: require('./util')
+    Store: Store,
+    StoreItem: StoreItem,
+    getOneOf: getOneOf,
+    getRandomIndex: getRandomIndex
 };

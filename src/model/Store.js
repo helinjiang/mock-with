@@ -1,10 +1,10 @@
-const Item = require('./Item');
-const { getOneOf, getRandomIndex } = require('../util');
+import StoreItem from './StoreItem';
+import { getOneOf, getRandomIndex } from '../util';
 
-module.exports = class Controller {
+export default class Store {
     constructor(list = []) {
         /**
-         * 存储的数据结构为 [{Item},{Item}]
+         * 存储的数据结构为 [{StoreItem},{StoreItem}]
          * @type {Array}
          */
         this.store = [];
@@ -32,7 +32,7 @@ module.exports = class Controller {
      * @param {Array} [tags] 标签数组
      */
     addOne(value, tags = []) {
-        let newItem = (value instanceof Item) ? value : new Item(value, tags);
+        let newItem = (value instanceof StoreItem) ? value : new StoreItem(value, tags);
 
         // 如果已经存在，则不再新增，而是更新之
         let filterResult = this.store.filter((item) => {
@@ -97,9 +97,9 @@ module.exports = class Controller {
      */
     getOne(tags, shouldSubset) {
         if (!tags) {
-            return this.getRandom()
+            return this.getRandom();
         } else {
-            return this.getByTag(tags, shouldSubset)
+            return this.getByTag(tags, shouldSubset);
         }
     }
 
@@ -114,7 +114,7 @@ module.exports = class Controller {
         let result = [];
 
         for (let i = 0; i < total; i++) {
-            result.push(this.getOne(tags, shouldSubset))
+            result.push(this.getOne(tags, shouldSubset));
         }
 
         return result;

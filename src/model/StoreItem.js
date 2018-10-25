@@ -1,6 +1,6 @@
-const { expect } = require('chai');
+import { expect } from 'chai';
 
-module.exports = class Item {
+export default class StoreItem {
     /**
      * 每一个 Item 都有一个值(value)，以及数个标签(tags)
      *
