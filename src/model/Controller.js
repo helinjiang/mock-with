@@ -90,9 +90,40 @@ module.exports = class Controller {
     }
 
     /**
+     * 获取一个结果
+     * @param {String | Array} [tags] 标签名称或者标签名称数组
+     * @param {Boolean} [shouldSubset] 是否要求是子集，该值为true时，需要同时得匹配上，为false时，则只要有一个标签匹配即可
+     * @return {*}
+     */
+    getOne(tags, shouldSubset) {
+        if (!tags) {
+            return this.getRandom()
+        } else {
+            return this.getByTag(tags, shouldSubset)
+        }
+    }
+
+    /**
+     * 获取多个结果
+     * @param {Number} total 数量
+     * @param {String | Array} [tags] 标签名称或者标签名称数组
+     * @param {Boolean} [shouldSubset] 是否要求是子集，该值为true时，需要同时得匹配上，为false时，则只要有一个标签匹配即可
+     * @return {Array}
+     */
+    getSome(total = 0, tags, shouldSubset) {
+        let result = [];
+
+        for (let i = 0; i < total; i++) {
+            result.push(this.getOne(tags, shouldSubset))
+        }
+
+        return result;
+    }
+
+    /**
      * 通过指定的 tag 找到对应的数据
-     * @param {String | Array} tags
-     * @param {Boolean} [shouldSubset] 是否要求是子集
+     * @param {String | Array} tags 标签名称或者标签名称数组
+     * @param {Boolean} [shouldSubset] 是否要求是子集，该值为true时，需要同时得匹配上，为false时，则只要有一个标签匹配即可
      * @return {*}
      */
     getByTag(tags, shouldSubset) {
