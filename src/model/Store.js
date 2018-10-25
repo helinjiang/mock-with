@@ -27,7 +27,7 @@ export default class Store {
     }
 
     /**
-     * 追加一个数据到仓库中
+     * 追加一个桩数据到仓库中
      * @param {String || Number || Object} value
      * @param {Array} [tags] 标签数组
      */
@@ -92,14 +92,14 @@ export default class Store {
     /**
      * 获取一个结果
      * @param {String | Array} [tags] 标签名称或者标签名称数组
-     * @param {Boolean} [shouldSubset] 是否要求是子集，该值为true时，需要同时得匹配上，为false时，则只要有一个标签匹配即可
+     * @param {Boolean} [isStrict] 是否是严格模式，该值为true时，则 tags 中的标签都必须是该桩数据的标签，为false时，则只要有一个标签匹配即可
      * @return {*}
      */
-    getOne(tags, shouldSubset) {
+    getOne(tags, isStrict) {
         if (!tags) {
             return this.getRandom();
         } else {
-            return this.getByTag(tags, shouldSubset);
+            return this.getByTag(tags, isStrict);
         }
     }
 
@@ -107,14 +107,14 @@ export default class Store {
      * 获取多个结果
      * @param {Number} total 数量
      * @param {String | Array} [tags] 标签名称或者标签名称数组
-     * @param {Boolean} [shouldSubset] 是否要求是子集，该值为true时，需要同时得匹配上，为false时，则只要有一个标签匹配即可
+     * @param {Boolean} [isStrict] 是否是严格模式，该值为true时，则 tags 中的标签都必须是该桩数据的标签，为false时，则只要有一个标签匹配即可
      * @return {Array}
      */
-    getSome(total = 0, tags, shouldSubset) {
+    getSome(total = 0, tags, isStrict) {
         let result = [];
 
         for (let i = 0; i < total; i++) {
-            result.push(this.getOne(tags, shouldSubset));
+            result.push(this.getOne(tags, isStrict));
         }
 
         return result;
@@ -123,16 +123,16 @@ export default class Store {
     /**
      * 通过指定的 tag 找到对应的数据
      * @param {String | Array} tags 标签名称或者标签名称数组
-     * @param {Boolean} [shouldSubset] 是否要求是子集，该值为true时，需要同时得匹配上，为false时，则只要有一个标签匹配即可
+     * @param {Boolean} [isStrict] 是否是严格模式，该值为true时，则 tags 中的标签都必须是该桩数据的标签，为false时，则只要有一个标签匹配即可
      * @return {*}
      */
-    getByTag(tags, shouldSubset) {
+    getByTag(tags, isStrict) {
         if (!Array.isArray(tags)) {
             tags = [tags];
         }
 
         let filterResult = this.store.filter((item) => {
-            return item.isMyTag(tags, shouldSubset);
+            return item.isMyTag(tags, isStrict);
         });
 
         if (!filterResult.length) {
