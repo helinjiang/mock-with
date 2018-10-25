@@ -1,14 +1,17 @@
-import { expect } from 'chai';
-import DataMockController, { DataItem } from '../src';
+const { expect } = require('chai');
+
+const mockWith = require('../lib');
 
 describe('测试 index.js', function () {
-
-    it('DataMockController 属性存在', function () {
-        expect(DataMockController).to.be.an('function');
+    it('should contain some fields', () => {
+        expect(mockWith).to.have.all.keys('Controller', 'Item', 'util');
     });
 
-    it('DataItem 属性存在', function () {
-        expect(DataItem).to.be.an('function');
+    it('Controller 属性存在', function () {
+        expect(mockWith.Controller).to.be.an('function');
     });
 
+    it('Item 属性存在', function () {
+        expect(mockWith.Item).to.be.an('function');
+    });
 });

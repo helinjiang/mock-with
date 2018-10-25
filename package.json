@@ -1,32 +1,33 @@
 {
   "name": "mock-with",
-  "version": "0.0.6",
-  "description": "make mock to be easy",
+  "version": "1.0.1",
+  "description": "Make mock to be easy",
   "main": "lib/index.js",
   "scripts": {
     "dev": "babel src -d lib -w",
-    "prepublish": "babel  src -d lib",
+    "prepublishOnly": "babel  src -d lib",
     "test": "mocha --recursive --require babel-core/register"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/helinjiang/mock-with.git"
+    "url": "git+https://github.com/matmanjs/mock-with.git"
   },
   "keywords": [
+    "matman",
     "mock"
   ],
   "author": "helinjiang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/helinjiang/mock-with/issues"
+    "url": "https://github.com/matmanjs/mock-with/issues"
   },
-  "homepage": "https://github.com/helinjiang/mock-with#readme",
+  "homepage": "https://github.com/matmanjs/mock-with#readme",
   "dependencies": {
     "chai": "^4.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-preset-es2015-loose": "^8.0.0",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "mocha": "^4.0.1"
   }
