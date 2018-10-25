@@ -1,6 +1,6 @@
 {
   "name": "mock-with",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Make mock to be easy",
   "main": "lib/index.js",
   "scripts": {

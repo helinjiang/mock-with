@@ -10,14 +10,23 @@ describe('测试 model/Controller.js', function () {
     });
 
     describe('参数list为普通数组', function () {
-        let controller = new Controller(['a', 'b', 'c', 'd']);
+        let arr=['a', 'b', 'c', 'd'];
+        let controller = new Controller(arr);
 
         it('controller.store 有四个元素', function () {
             expect(controller.store).to.have.lengthOf(4);
         });
 
         it('controller.getRandom() 随机返回一个list中的值', function () {
-            expect(controller.getRandom()).to.be.oneOf(['a', 'b', 'c', 'd']);
+            expect(controller.getRandom()).to.be.oneOf(arr);
+        });
+
+        it('controller.getOne() 随机返回一个list中的值', function () {
+            expect(controller.getOne()).to.be.oneOf(arr);
+        });
+
+        it('controller.getSome(2) 随机返回一个数组，包含两个元素', function () {
+            expect(arr).to.include.members(controller.getSome(2));
         });
     });
 

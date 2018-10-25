@@ -4,7 +4,7 @@
  * @param {Array} list 数组
  * @returns {Number}
  */
-function getRandomIndex(list = []) {
+export function getRandomIndex(list = []) {
     return parseInt(Math.random() * list.length + '');
 }
 
@@ -14,11 +14,7 @@ function getRandomIndex(list = []) {
  * @param {Array} list 数组
  * @returns {*}
  */
-function getOneOf(list = []) {
+export function getOneOf(list = []) {
     return list[getRandomIndex(list)];
 }
 
-module.exports = {
-    getRandomIndex: getRandomIndex,
-    getOneOf: getOneOf
-};

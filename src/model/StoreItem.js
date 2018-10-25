@@ -1,6 +1,6 @@
-const { expect } = require('chai');
+import { expect } from 'chai';
 
-module.exports = class Item {
+export default class StoreItem {
     /**
      * 每一个 Item 都有一个值(value)，以及数个标签(tags)
      *
@@ -44,13 +44,13 @@ module.exports = class Item {
 
     /**
      * 判断目标标签是否与自己的标签有交集，
-     * 如果要求目标标签集合是自己标签的子集，则需要设置 shouldSubset=true
+     * 如果要求目标标签集合是自己标签的子集，则需要设置 isStrict=true
      *
      * @param {Array | String} tags 标签集合
-     * @param {Boolean} [shouldSubset] 是否要求是子集
+     * @param {Boolean} [isStrict] 是否是严格模式，该值为true时，则 tags 中的标签都必须是该桩数据的标签，为false时，则只要有一个标签匹配即可
      * @returns {boolean}
      */
-    isMyTag(tags = [], shouldSubset) {
+    isMyTag(tags = [], isStrict) {
         if (!Array.isArray(tags)) {
             tags = [tags];
         }
@@ -63,7 +63,7 @@ module.exports = class Item {
             return false;
         }
 
-        if (!shouldSubset) {
+        if (!isStrict) {
             return true;
         }
 
